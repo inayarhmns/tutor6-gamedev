@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_items.png" type="Texture" id=1]
+[ext_resource path="res://scenes/GainLive.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 512, 384, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 27.074
+
+[node name="AnimatedSprite" type="AnimatedSprite"]
+position = Vector2( 0, 9 )
+frames = SubResource( 2 )
+
+[node name="GainLive" type="Area2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GainLive"]
+position = Vector2( 0, -1 )
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="GainLive" to="GainLive" method="_on_GainLive_body_entered"]
